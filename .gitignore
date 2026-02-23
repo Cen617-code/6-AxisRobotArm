@@ -1,1 +1,17 @@
-CLAUDE.md
+.agents
+# ROS2 colcon 编译生成
+build/
+install/
+log/
+
+# Python
+__pycache__/
+*.pyc
+
+# IDE
+.vscode/
+.idea/
+
+# OS
+.DS_Store
+*~
