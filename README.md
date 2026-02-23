@@ -2,7 +2,7 @@
 
 一个完整的 6 轴机械臂学习项目，涵盖 URDF 建模、正/逆运动学(C++)、Gazebo Harmonic 物理仿真、MoveIt2 运动规划与避障。
 
-![演示](/Users/ceno_0/Documents/文件/简历/项目/6-AxisRobotArm/assets/演示-1860908.gif)
+![Image](https://github.com/user-attachments/assets/17953169-ea52-48c3-9389-a66d1825c5cd)
 
 ## 技术栈
 
