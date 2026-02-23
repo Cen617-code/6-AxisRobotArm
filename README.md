@@ -4,7 +4,7 @@
 
 <video src="/Users/ceno_0/Documents/文件/简历/项目/6-AxisRobotArm/视频演示.webm"></video>
 
-## 技术栈
+## 技术栈  
 
 | 层级 | 技术 |
 |------|------|
