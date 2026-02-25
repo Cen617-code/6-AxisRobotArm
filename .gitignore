@@ -1,4 +1,3 @@
-.agents
 # ROS2 colcon 编译生成
 build/
 install/
@@ -15,3 +14,5 @@ __pycache__/
 # OS
 .DS_Store
 *~
+
+.agents
