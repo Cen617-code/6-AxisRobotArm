@@ -1,3 +1,7 @@
+# joint_limits.yaml
+#
+# 关节的速度与加速度极限配置，用于运动规划中的时间参数化。
+
 joint_limits:
   joint_1:
     has_velocity_limits: true

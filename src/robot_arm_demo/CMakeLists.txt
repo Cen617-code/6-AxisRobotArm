@@ -1,3 +1,7 @@
+# CMakeLists.txt
+#
+# 核心包的 CMake 构建文件。
+
 cmake_minimum_required(VERSION 3.8)
 project(robot_arm_demo)
 
@@ -5,7 +9,7 @@ if(CMAKE_COMPILER_IS_GNUCXX OR CMAKE_CXX_COMPILER_ID MATCHES "Clang")
   add_compile_options(-Wall -Wextra -Wpedantic)
 endif()
 
-# find dependencies
+# 查找依赖项
 find_package(ament_cmake REQUIRED)
 find_package(rclcpp REQUIRED)
 find_package(sensor_msgs REQUIRED)
@@ -15,10 +19,10 @@ find_package(tf2_ros REQUIRED)
 find_package(moveit_msgs REQUIRED)
 find_package(shape_msgs REQUIRED)
 
-# Eigen3 for Kinematics
+# 用于运动学的 Eigen3
 find_package(Eigen3 REQUIRED)
 
-# include directories
+# 包含目录
 include_directories(
   include
   ${EIGEN3_INCLUDE_DIRS}
@@ -28,7 +32,7 @@ add_executable(kinematics_solver src/kinematics_solver.cpp)
 target_include_directories(kinematics_solver PUBLIC
   $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
   $<INSTALL_INTERFACE:include>)
-target_compile_features(kinematics_solver PUBLIC c_std_99 cxx_std_17)  # Requiring C++17
+target_compile_features(kinematics_solver PUBLIC c_std_99 cxx_std_17)  # 要求 C++17
 ament_target_dependencies(
   kinematics_solver
   rclcpp
@@ -40,7 +44,7 @@ ament_target_dependencies(
 
 target_link_libraries(kinematics_solver Eigen3::Eigen)
 
-# Obstacle publisher node
+# 障碍物发布节点
 add_executable(add_obstacles src/add_obstacles.cpp)
 ament_target_dependencies(add_obstacles
   rclcpp

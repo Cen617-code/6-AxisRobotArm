@@ -54,7 +54,7 @@ private:
       // 形状：0.6 x 0.4 x 0.02 的薄板
       shape_msgs::msg::SolidPrimitive box;
       box.type = shape_msgs::msg::SolidPrimitive::BOX;
-      box.dimensions = {0.6, 0.4, 0.02}; // x, y, z
+      box.dimensions = {0.6, 0.4, 0.02}; // 长, 宽, 高 (x, y, z)
 
       // 位姿：放在机械臂前方
       geometry_msgs::msg::Pose pose;
@@ -82,7 +82,7 @@ private:
       // 形状：高 0.5m，半径 0.05m 的圆柱
       shape_msgs::msg::SolidPrimitive cylinder;
       cylinder.type = shape_msgs::msg::SolidPrimitive::CYLINDER;
-      cylinder.dimensions = {0.5, 0.05}; // height, radius
+      cylinder.dimensions = {0.5, 0.05}; // 高度, 半径
 
       // 位姿：放在机械臂侧面
       geometry_msgs::msg::Pose pose;
@@ -111,7 +111,7 @@ private:
       // 形状：半径 0.08m 的球
       shape_msgs::msg::SolidPrimitive sphere;
       sphere.type = shape_msgs::msg::SolidPrimitive::SPHERE;
-      sphere.dimensions = {0.08}; // radius
+      sphere.dimensions = {0.08}; // 半径
 
       // 位姿：放在工作空间中
       geometry_msgs::msg::Pose pose;

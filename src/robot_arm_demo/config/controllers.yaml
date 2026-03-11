@@ -1,3 +1,7 @@
+# controllers.yaml
+# 
+# ros2_control 的控制器配置文件，定义了硬件接口和控制器参数。
+
 controller_manager:
   ros__parameters:
     update_rate: 100

@@ -1,3 +1,7 @@
+# urdf.rviz
+# 
+# RViz 可视化配置文件
+
 Panels:
   - Class: rviz_common/Displays
     Help Height: 78

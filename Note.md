@@ -89,8 +89,14 @@
 **现象**：规划成功但执行被拒绝，`MoveGroupInterface::move() failed or timeout reached`。  
 **原因**：`allowed_start_tolerance: 0.01` 太严格，仿真中的微小关节偏差导致起始状态检查失败。  
 **解决**：
-- 设置 `allowed_start_tolerance: 0.0` 禁用起始状态检查
 - 增大 `allowed_execution_duration_scaling` 和 `allowed_goal_duration_margin`
+
+### 问题 8：Antigravity IDE (Clangd) 找不到 C++ 依赖报红
+**现象**：在 `kinematics_solver.cpp` 中引入 `rclcpp`、`Eigen` 等头文件时出现红色波浪线报错。  
+**原因**：由于系统使用的是基于 Clangd 的 IDE (Antigravity) ，它需要读取项目的 `compile_commands.json` 才能获取构建系统的包含路径（Include Paths）。而 Colcon 默认不生成该文件。  
+**解决**：
+- 添加参数强制生成编译命令数据库：`colcon build --cmake-args -DCMAKE_EXPORT_COMPILE_COMMANDS=ON`
+- 将生成的文件链接到工作区根目录，以便 IDE 解析：`ln -s ~/RobotStudy/build/robot_arm_demo/compile_commands.json ~/RobotStudy/compile_commands.json`
 
 ---
 

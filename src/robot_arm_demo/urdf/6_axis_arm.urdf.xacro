@@ -1,8 +1,13 @@
 <?xml version="1.0"?>
+<!-- 
+  6_axis_arm.urdf.xacro
+  
+  6轴机械臂的机器人描述文件 (Xacro宏格式)。
+-->
 <robot name="6_axis_arm" xmlns:xacro="http://www.ros.org/wiki/xacro">
 
   <!-- =============================== -->
-  <!--           MATERIALS             -->
+  <!--               材质              -->
   <!-- =============================== -->
   <material name="blue">
     <color rgba="0 0 0.8 1"/>
@@ -14,7 +19,7 @@
     <color rgba="0 0.8 0 1"/>
   </material>
   
-  <!-- Dummy link to fix KDL root inertia warning -->
+  <!-- 用于修复 KDL 根节点惯性警告的虚拟连杆 -->
   <link name="world"/>
   <joint name="world_fixed" type="fixed">
     <parent link="world"/>
@@ -22,7 +27,7 @@
   </joint>
 
   <!-- =============================== -->
-  <!--             LINKS               -->
+  <!--               连杆              -->
   <!-- =============================== -->
   
   <link name="base_link">
@@ -173,7 +178,7 @@
   </link>
 
   <!-- =============================== -->
-  <!--            JOINTS               -->
+  <!--               关节              -->
   <!-- =============================== -->
 
   <joint name="joint_1" type="revolute">
@@ -231,7 +236,7 @@
   </joint>
 
   <!-- =============================== -->
-  <!--        ROS2 CONTROL             -->
+  <!--        ROS2 控制接口            -->
   <!-- =============================== -->
 
   <ros2_control name="GazeboSimSystem" type="system">
@@ -301,7 +306,7 @@
   </ros2_control>
 
   <!-- =============================== -->
-  <!--        GAZEBO PLUGIN            -->
+  <!--        GAZEBO 插件              -->
   <!-- =============================== -->
   
   <gazebo>

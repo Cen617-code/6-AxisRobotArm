@@ -1,3 +1,7 @@
+# display.launch.py
+# 
+# 启动RViz可视化节点，用于查看机器人的URDF模型。
+
 import os
 from ament_index_python.packages import get_package_share_directory
 from launch import LaunchDescription

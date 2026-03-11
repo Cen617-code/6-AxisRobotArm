@@ -1,12 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!-- 
+  6_axis_arm.srdf
+  
+  语义机器人描述格式文件。定义了规划组、预定义姿态以及允许忽略的碰撞矩阵。
+-->
 <robot name="6_axis_arm">
 
-  <!-- Planning group: full arm chain -->
+  <!-- 规划组：完整的机械臂运动链 -->
   <group name="arm">
     <chain base_link="base_link" tip_link="link_6"/>
   </group>
 
-  <!-- Named states -->
+  <!-- 预定义姿态 -->
   <group_state name="home" group="arm">
     <joint name="joint_1" value="0.0"/>
     <joint name="joint_2" value="0.0"/>
@@ -25,7 +30,7 @@
     <joint name="joint_6" value="0.0"/>
   </group_state>
 
-  <!-- Disable collision checking between adjacent links -->
+  <!-- 禁用相邻或不可能发生碰撞的连杆间的碰撞检测以优化性能 -->
   <disable_collisions link1="base_link" link2="link_1" reason="Adjacent"/>
   <disable_collisions link1="link_1" link2="link_2" reason="Adjacent"/>
   <disable_collisions link1="link_2" link2="link_3" reason="Adjacent"/>

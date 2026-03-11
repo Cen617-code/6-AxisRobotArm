@@ -1,3 +1,7 @@
+# gazebo.launch.py
+# 
+# 启动Gazebo仿真环境及相关的控制器和状态发布节点。
+
 import os
 from ament_index_python.packages import get_package_share_directory
 from launch import LaunchDescription
@@ -10,12 +14,12 @@ import xacro
 def generate_launch_description():
     pkg_share = get_package_share_directory('robot_arm_demo')
     
-    # Process URDF file
+    # 处理URDF文件
     xacro_file = os.path.join(pkg_share, 'urdf', '6_axis_arm.urdf.xacro')
     doc = xacro.process_file(xacro_file)
     robot_description = {'robot_description': doc.toxml()}
     
-    # Robot State Publisher (must use sim time to match Gazebo clock)
+    # 机器人状态发布节点 (必须使用仿真时间以匹配Gazebo时钟)
     node_robot_state_publisher = Node(
         package='robot_state_publisher',
         executable='robot_state_publisher',
@@ -23,7 +27,7 @@ def generate_launch_description():
         parameters=[robot_description, {'use_sim_time': True}]
     )
 
-    # Launch Gazebo physics server (headless)
+    # 启动Gazebo物理服务端 (无头模式)
     pkg_ros_gz_sim = get_package_share_directory('ros_gz_sim')
     gazebo_server = IncludeLaunchDescription(
         PythonLaunchDescriptionSource(
@@ -32,13 +36,13 @@ def generate_launch_description():
         launch_arguments={'gz_args': '-r -s -v4 empty.sdf'}.items(),
     )
 
-    # Launch Gazebo GUI client separately
+    # 单独启动Gazebo GUI客户端
     gazebo_gui = ExecuteProcess(
         cmd=['gz', 'sim', '-g', '-v4'],
         output='screen'
     )
 
-    # Spawn entity via ros_gz_sim create
+    # 通过 ros_gz_sim create 生成实体
     spawn_entity = Node(
         package='ros_gz_sim',
         executable='create',
@@ -46,7 +50,7 @@ def generate_launch_description():
         output='screen'
     )
 
-    # Bridge clock from Gazebo to ROS
+    # 桥接Gazebo时钟到ROS
     clock_bridge = Node(
         package='ros_gz_bridge',
         executable='parameter_bridge',
@@ -54,7 +58,7 @@ def generate_launch_description():
         output='screen'
     )
 
-    # Load and start joint state broadcaster
+    # 加载并启动关节状态广播器
     load_joint_state_broadcaster = Node(
         package='controller_manager',
         executable='spawner',
@@ -62,7 +66,7 @@ def generate_launch_description():
         output='screen'
     )
 
-    # Load and start arm controller
+    # 加载并启动机械臂控制器
     load_arm_controller = Node(
         package='controller_manager',
         executable='spawner',
@@ -70,7 +74,7 @@ def generate_launch_description():
         output='screen'
     )
 
-    # Wait for spawn_entity to finish before loading controllers
+    # 等待 spawn_entity 完成后再加载控制器
     delay_broadcaster_after_spawn = RegisterEventHandler(
         event_handler=OnProcessExit(
             target_action=spawn_entity,
@@ -78,7 +82,7 @@ def generate_launch_description():
         )
     )
 
-    # Delay GUI launch by 5 seconds so physics + controllers are ready first
+    # 延迟5秒启动GUI，确保物理引擎和控制器先就绪
     delayed_gui = TimerAction(
         period=5.0,
         actions=[gazebo_gui]
